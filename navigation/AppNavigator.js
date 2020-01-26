@@ -4,9 +4,10 @@ import { createAppContainer,
 } from 'react-navigation';
 
 import MainScreen from '../screens/MainScreen';
+import GroupsScreen from '../screens/GroupsScreen'
 
 const MySwitchNavigator = createSwitchNavigator({
-  Main: {screen: MainScreen},
+  Main: {screen: GroupsScreen},
 });
 
 export default createAppContainer(

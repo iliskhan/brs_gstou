@@ -4,10 +4,8 @@ import {
 	StyleSheet,
 	View,
 	Image,
-	Button,
 	TouchableOpacity,
-	Text,
-	AsyncStorage, } from "react-native";
+	Text, } from "react-native";
 
 export default class MainScreen extends Component {
 
@@ -82,5 +80,4 @@ const styles = StyleSheet.create({
     lineHeight: 29,
     // fontFamily: 'SF UI Text',
   }
-  
 })
