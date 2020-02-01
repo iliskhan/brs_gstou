@@ -12,22 +12,18 @@ import {
 
 import { LinearGradient } from 'expo-linear-gradient'
 
-const screenWidth = Math.round(Dimensions.get('window').width);  
-const screenHeight = Math.round(Dimensions.get('window').height);
+const screenW = Math.round(Dimensions.get('window').width);  
+const screenH = Math.round(Dimensions.get('window').height);
 
 const institutes_names = ['ИПИТ', 'ИНГ', 'ИЭ', 'ИСАД', 'ИЦЭТП']
-
+const courses = 4
 
 export default class GroupsScreen extends Component {
 
-  institutes_items = institutes_names.map((name, key) => 
-    <TouchableOpacity
-      key={key}
-      style={styles.institute_button}
-    >
-      <Text> {name} </Text>
-    </TouchableOpacity>
-  )
+  state = {
+    inst_name: institutes_names[0],
+    courses: [...Array(courses).keys()].map(i => i++)
+  }
 
   render() {
     return (
@@ -35,29 +31,48 @@ export default class GroupsScreen extends Component {
         colors={['#7B88D3', '#5B4CAB']}
         style={styles.container}
       >
-        <View
-          style={styles.institutes}
-        >
+        <View>
           <Text style={styles.selection_text}> Выберите институт </Text>
-          <ScrollView
-            style={styles.institute_selector}
+          <ScrollView 
             horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.institute_selector}
           >
-              {this.institutes_items}
-            
+            {institutes_names.map((name, key) => 
+              <TouchableOpacity
+                key={key}
+                onPress={() => {
+                  this.setState({
+                    inst_name : name,
+                  }, () => {console.log(this.state)})
+                  
+                }}
+                style={[(this.state.inst_name == name) ? styles.selected_button: styles.not_selected_button]}
+              >
+                <Text style={[(this.state.inst_name == name) ? styles.selected_button_text: styles.not_selected_button_text]}> 
+                  {name} 
+                </Text>
+              </TouchableOpacity>
+            )}
           </ScrollView>
         </View>
         
-        <View
-          style={styles.courses}
-        >
-          <Text style={styles.selection_text}> Выберите курс </Text>
+        <View style={styles.courses}>
+          <Text style={styles.selection_text}> 
+            Выберите курс 
+          </Text>
+          <View style={styles.course_selector}>
+            { this.state.courses.map(course => <Text key={course}>{course}</Text>) }
+          </View>
+
         </View>
 
         <View
           style={styles.groups}
         >
-          <Text style={styles.selection_text}> Выберите группу </Text>
+          <Text style={styles.selection_text}> 
+            Выберите группу
+          </Text>
         </View>
       </LinearGradient>
     );
@@ -69,11 +84,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E5E5E5',
   },
-  institutes: {
-    flex: 2,
-  },
   courses: {
     flex: 1,
+    // backgroundColor: 'black',
   },
   groups: {
     flex: 4,
@@ -86,15 +99,45 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontSize: 14,
   },
-  institute_button: {
+  institute_selector: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  course_selector: {
+    // flex: 1,
+    margin: '4%',
+    padding: '1%',
+    flexDirection: 'row',
+    backgroundColor: "green",
+  },
+  not_selected_button: {
     backgroundColor: '#7B88D3',
     borderRadius: 10,
-    width: Math.round(screenWidth/4),
-    marginVertical: '15%',
+    height:Math.round(screenW/4),
+    width: Math.round(screenW/4),
+    marginHorizontal: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  institute_selector: {
-    backgroundColor: 'black',
+  not_selected_button_text: {
+    color: '#9DA7EE',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    lineHeight: 22,
   },
+  selected_button: {
+    backgroundColor: '#9DA7EE',
+    borderRadius: 10,
+    height:Math.round(screenW/4),
+    width: Math.round(screenW/4),
+    marginHorizontal: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selected_button_text: {
+    color: '#FCFCFF',
+    fontStyle: 'normal',
+    fontWeight: '500',
+    lineHeight: 22,
+  }
 })
