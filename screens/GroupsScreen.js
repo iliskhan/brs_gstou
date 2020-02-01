@@ -16,11 +16,13 @@ const screenW = Math.round(Dimensions.get('window').width);
 const screenH = Math.round(Dimensions.get('window').height);
 
 const institutes_names = ['ИПИТ', 'ИНГ', 'ИЭ', 'ИСАД', 'ИЦЭТП']
+const groups_names = ['ПИ-18', 'ИСТ-18', 'БИС-18', 'БИН-18']
 const courses = 4
 
 export default class GroupsScreen extends Component {
 
   state = {
+    group_name: undefined,
     selected_course: 1,
     inst_name: institutes_names[0],
     courses: [...Array(courses).keys()].map(i => ++i)
@@ -47,9 +49,9 @@ export default class GroupsScreen extends Component {
                     inst_name : name,
                   }, () => {console.log(this.state)})
                 }}
-                style={[(this.state.inst_name == name) ? styles.selected_button: styles.not_selected_button]}
+                style={(this.state.inst_name == name) ? styles.selected_button: styles.not_selected_button}
               >
-                <Text style={[(this.state.inst_name == name) ? styles.selected_button_text: styles.not_selected_button_text]}> 
+                <Text style={(this.state.inst_name == name) ? styles.selected_button_text: styles.not_selected_button_text}> 
                   {name} 
                 </Text>
               </TouchableOpacity>
@@ -70,10 +72,10 @@ export default class GroupsScreen extends Component {
                   selected_course: course,
                 })
               }}
-              style={[(this.state.selected_course == course) ? styles.courses_button_selected: styles.courses_button]}>
+              style={(this.state.selected_course == course) ? styles.courses_button_selected: styles.courses_button}>
                 <Text 
                 key={course} 
-                style={styles.courses_text}>
+                style={(this.state.selected_course == course) ? [styles.courses_text, {color: 'white'}]:styles.courses_text}>
                   {course}
               </Text>
               {/* <View style={{flex:1 ,backgroundColor: 'black'}}></View> */}
@@ -88,6 +90,26 @@ export default class GroupsScreen extends Component {
           <Text style={styles.selection_text}> 
             Выберите группу
           </Text>
+          <ScrollView
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.institute_selector}
+          >
+            {groups_names.map((group_name, key) => {
+              <TouchableOpacity
+              key={key}
+              onPress={() => {
+                this.setState({
+                  group_name : group_name,
+                })
+              }}
+              style={(this.state.group_name == group_name) ? styles.selected_button: styles.not_selected_button}
+            >
+              <Text style={(this.state.group_name == group_name) ? styles.selected_button_text: styles.not_selected_button_text}> 
+                {group_name} 
+              </Text>
+            </TouchableOpacity>
+            })}
+          </ScrollView>
         </View>
       </LinearGradient>
     );
