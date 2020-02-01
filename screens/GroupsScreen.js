@@ -21,8 +21,9 @@ const courses = 4
 export default class GroupsScreen extends Component {
 
   state = {
+    selected_course: 1,
     inst_name: institutes_names[0],
-    courses: [...Array(courses).keys()].map(i => i++)
+    courses: [...Array(courses).keys()].map(i => ++i)
   }
 
   render() {
@@ -45,7 +46,6 @@ export default class GroupsScreen extends Component {
                   this.setState({
                     inst_name : name,
                   }, () => {console.log(this.state)})
-                  
                 }}
                 style={[(this.state.inst_name == name) ? styles.selected_button: styles.not_selected_button]}
               >
@@ -62,7 +62,22 @@ export default class GroupsScreen extends Component {
             Выберите курс 
           </Text>
           <View style={styles.course_selector}>
-            { this.state.courses.map(course => <Text key={course}>{course}</Text>) }
+            { this.state.courses.map(course => 
+            <TouchableOpacity
+              key={course}
+              onPress={() => {
+                this.setState({
+                  selected_course: course,
+                })
+              }}
+              style={[(this.state.selected_course == course) ? styles.courses_button_selected: styles.courses_button]}>
+                <Text 
+                key={course} 
+                style={styles.courses_text}>
+                  {course}
+              </Text>
+              {/* <View style={{flex:1 ,backgroundColor: 'black'}}></View> */}
+            </TouchableOpacity>) }
           </View>
 
         </View>
@@ -86,13 +101,14 @@ const styles = StyleSheet.create({
   },
   courses: {
     flex: 1,
+    // justifyContent: 'center',
     // backgroundColor: 'black',
   },
   groups: {
     flex: 4,
   },
   selection_text: {
-    padding: '2%',
+    padding: '6%',
     color: '#C0C6FE',
     letterSpacing: -0.40,
     lineHeight: 22,
@@ -105,16 +121,36 @@ const styles = StyleSheet.create({
   },
   course_selector: {
     // flex: 1,
-    margin: '4%',
-    padding: '1%',
+    height: Math.round(screenH/25),
+    marginHorizontal: '5%',
+    alignItems: 'center',
+    justifyContent: 'space-around',
     flexDirection: 'row',
-    backgroundColor: "green",
+    backgroundColor: "#7B88D3",
+    borderRadius: 8,
+  },
+  courses_text: {
+    color: '#9DA7EE',
+  },
+  courses_button: {
+    flex: 1,
+    alignItems: 'center',
+    // backgroundColor: 'black',
+
+  },
+  courses_button_selected: {
+    flex: 1,
+    paddingVertical: '0.7%',
+    alignItems: 'center',
+    backgroundColor: '#C0C6FE',
+    borderRadius: 7,
+
   },
   not_selected_button: {
     backgroundColor: '#7B88D3',
     borderRadius: 10,
-    height:Math.round(screenW/4),
-    width: Math.round(screenW/4),
+    height:Math.round(screenW/4.5),
+    width: Math.round(screenW/4.5),
     marginHorizontal: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -128,8 +164,8 @@ const styles = StyleSheet.create({
   selected_button: {
     backgroundColor: '#9DA7EE',
     borderRadius: 10,
-    height:Math.round(screenW/4),
-    width: Math.round(screenW/4),
+    height:Math.round(screenW/4.5),
+    width: Math.round(screenW/4.5),
     marginHorizontal: 5,
     justifyContent: 'center',
     alignItems: 'center',
