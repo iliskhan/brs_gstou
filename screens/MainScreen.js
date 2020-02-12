@@ -15,13 +15,14 @@ export default class MainScreen extends Component {
 			style={ styles.container }>	
 				<View style={styles.image}>
 					<Image
-						source={require("../assets/images/ggntu_logo.png")}
+            source={require("../assets/images/ggntu_logo.png")}
+            style={{width: 174, height: 174}}
 					/>
 				</View>
 				<View style={styles.buttons}>
           <TouchableOpacity 
             style={styles.buttonView}
-            // onPress={}
+            onPress={() => this.props.navigation.navigate({ routeName: 'GroupsScreen' })}
           >
             <Text style={styles.textStyle}>
               Баллы
@@ -78,6 +79,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 24,
     lineHeight: 29,
-    // fontFamily: 'SF UI Text',
+    fontFamily: 'SF-UI-Text',
   }
 })
