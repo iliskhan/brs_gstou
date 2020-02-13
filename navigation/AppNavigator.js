@@ -79,29 +79,11 @@ const MyStackNavigator = createStackNavigator({
               style={{width: 12, height: 21}}/>
           </TouchableOpacity>
           <Text style={styles.title}>БРС ГГНТУ</Text>
-          <View style={{width: '20%'}}></View>
+          <View style={{width: '20%'}}/>
         </View>
       )
     }
-    // title: 'БРС ГГНТУ',
-    // headerRight: <View></View>,
-    // headerStyle: {
-    //   margin: 0,
-    //   backgroundColor: 'black',
-    //   // padding: 0,
-    //   // marginTop: '2%',
-    //   // height: Math.round(screenW/20),
-    // },
-    // headerTintColor: 'white',
-    // headerTransparent: true,
-    // headerTitleStyle: {
-      // fontFamily: 'SF-UI-Text',
-    //   textAlign: 'center',
-    //   flexGrow:1,
-    //   // alignSelf:'center',
-    // }
   },
-  // headerMode: 'none',
 }
 );
 

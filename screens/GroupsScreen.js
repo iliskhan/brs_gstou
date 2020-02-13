@@ -41,6 +41,7 @@ export default class GroupsScreen extends Component {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.institute_selector}
+            
           >
             {institutes_names.map((name, key) => 
               <TouchableOpacity
@@ -56,7 +57,9 @@ export default class GroupsScreen extends Component {
               >
                 <Image
                   source={images.inst_logos[name]}
-                  style={[styles.logo_styles, { opacity: 0.25}]}
+                  style={(this.state.inst_name == name) ?
+                    styles.logo_styles:
+                    [styles.logo_styles, { opacity: 0.25}]}
                 />
                 <Text style={(this.state.inst_name == name) ? 
                   styles.selected_button_text: 
@@ -93,7 +96,6 @@ export default class GroupsScreen extends Component {
                   >
                     {course}
                 </Text>
-                {/* <View style={{flex:1 ,backgroundColor: 'black'}}></View> */}
               </TouchableOpacity>) }
           </View>
 

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { images } from '../constants/Images'
+
 import {
 	StyleSheet,
 	View,
@@ -15,7 +17,7 @@ export default class MainScreen extends Component {
 			style={ styles.container }>	
 				<View style={styles.image}>
 					<Image
-            source={require("../assets/images/ggntu_logo.png")}
+            source={images.ggntu_logo}
             style={{width: 174, height: 174}}
 					/>
 				</View>
