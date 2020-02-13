@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import {
+  FlatList,
   ScrollView,
   StyleSheet,
   Dimensions,
@@ -16,7 +17,7 @@ import { images } from '../constants/Images'
 const screenW = Math.round(Dimensions.get('window').width);  
 const screenH = Math.round(Dimensions.get('window').height);
 
-const institutes_names = ['ИПИТ', 'ИНГ', 'ИЭ', 'ИСАД', 'ИЦЭТП']
+const institutes_names = ['ИНГ', 'ИЭ', 'ИПИТ', 'ИСАД', 'ИЦЭТП']
 const groups_names = ['ПИ-18', 'ИСТ-18', 'БИС-18', 'БИН-18']
 const courses = 4
 
@@ -25,7 +26,7 @@ export default class GroupsScreen extends Component {
   state = {
     group_name: undefined,
     selected_course: 1,
-    inst_name: institutes_names[0],
+    inst_name: institutes_names[2],
     courses: [...Array(courses).keys()].map(i => ++i)
   }
 
@@ -37,39 +38,41 @@ export default class GroupsScreen extends Component {
       >
         <View>
           <Text style={styles.selection_text}> Выберите институт </Text>
-          <ScrollView 
+          <FlatList 
             horizontal={true}
+            ref={(ref) => { this.flatListRef = ref; }}
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.institute_selector}
+            initialScrollIndex={0.5}
+          
+            data={institutes_names}
+            keyExtractor={item => item}
             
-          >
-            {institutes_names.map((name, key) => 
+            renderItem={({item}) =>
               <TouchableOpacity
-                key={key}
                 onPress={() => {
                   this.setState({
-                    inst_name : name,
+                    inst_name : item,
                   }, () => {console.log(this.state)})
                 }}
-                style={(this.state.inst_name == name) ? 
+                style={(this.state.inst_name == item) ? 
                   styles.selected_button: 
                   styles.not_selected_button}
               >
                 <Image
-                  source={images.inst_logos[name]}
-                  style={(this.state.inst_name == name) ?
+                  source={images.inst_logos[item]}
+                  style={(this.state.inst_name == item) ?
                     styles.logo_styles:
                     [styles.logo_styles, { opacity: 0.25}]}
                 />
-                <Text style={(this.state.inst_name == name) ? 
+                <Text style={(this.state.inst_name == item) ? 
                   styles.selected_button_text: 
                   styles.not_selected_button_text}
                 > 
-                  {name} 
+                  {item} 
                 </Text>
               </TouchableOpacity>
-            )}
-          </ScrollView>
+            }
+          />
         </View>
         
         <View style={styles.courses}>
