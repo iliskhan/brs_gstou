@@ -70,12 +70,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#7B88D3',
     alignItems: 'center',
     shadowColor: 'rgba(123, 136, 211, 0.25)',
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
     shadowOpacity: 0.1,
-    elevation: 5,
+    elevation: 4,
   },
   textStyle: {
     color: 'white',

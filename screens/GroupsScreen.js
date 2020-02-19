@@ -40,7 +40,7 @@ export default class GroupsScreen extends Component {
           <Text style={styles.selection_text}> Выберите институт </Text>
           <FlatList 
             horizontal={true}
-            ref={(ref) => { this.flatListRef = ref; }}
+            ref={(ref) => { this.flatListRef = ref }}
             showsHorizontalScrollIndicator={false}
             initialScrollIndex={0.5}
           
@@ -93,15 +93,15 @@ export default class GroupsScreen extends Component {
                   styles.courses_button}
                 >
                   <Text 
-                  style={(this.state.selected_course == course) ? 
-                    [styles.courses_text, {color: 'white'}]:
-                    styles.courses_text}
+                    style={(this.state.selected_course == course) ? 
+                      [styles.courses_text, {color: 'white'}]:
+                      styles.courses_text}
                   >
                     {course}
                 </Text>
-              </TouchableOpacity>) }
+              </TouchableOpacity>) 
+            }
           </View>
-
         </View>
 
         <View
@@ -119,8 +119,14 @@ export default class GroupsScreen extends Component {
               onPress={() => {
                 this.setState({
                   group_name : group_name,
-                })
-              }}
+                }, 
+                () => this.props.navigation.navigate(
+                  'StudentsScreen', 
+                  {
+                    group_name, 
+                    students: [...Array(15).keys()].map(i => `студент ${++i}`)} )
+                )}
+              }
               style={(this.state.group_name == group_name) ? 
                 styles.selected_group_button : 
                 styles.group_button}
@@ -128,8 +134,8 @@ export default class GroupsScreen extends Component {
               <Text 
                 style={
                   (this.state.group_name == group_name) ?
-                    [styles.selected_button_text, {color: '#7B88D3'}] :
-                    [styles.not_selected_button_text, {color: '#C0C6FE'}]
+                    [styles.selected_button_text, {color: 'white', fontWeight: 'bold'}] :
+                    [styles.not_selected_button_text, {color: 'white'}]
                   }
                 > 
                 {group_name} 
@@ -189,6 +195,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   group_button: {
+    opacity: 0.4,
     marginBottom: '4%',
     backgroundColor: '#7B88D3',
     borderRadius: 10,

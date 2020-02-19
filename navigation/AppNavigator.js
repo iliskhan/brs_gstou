@@ -10,22 +10,19 @@ import {
 	TouchableOpacity,
   Text, } from "react-native";
   
-import { createAppContainer, 
-  createSwitchNavigator, 
-  createDrawerNavigator,
-} from 'react-navigation';
+import { createAppContainer, } from 'react-navigation';
 
 import { createStackNavigator, StackViewTransitionConfigs } from 'react-navigation-stack'
 
-import MainScreen from '../screens/MainScreen';
+import MainScreen from '../screens/MainScreen'
 import GroupsScreen from '../screens/GroupsScreen'
-
+import StudentsScreen from '../screens/StudentsScreen'
+import PointsScreen from '../screens/PointsScreen'
 
 const screenW = Math.round(Dimensions.get('window').width); 
 
 const styles = StyleSheet.create({
   header: {
-    // flex: 1,
     flexDirection: 'row',
     position:'absolute',
     height: Math.floor(screenW/6),
@@ -63,6 +60,12 @@ const MyStackNavigator = createStackNavigator({
   GroupsScreen: {
     screen: GroupsScreen,
   },
+  StudentsScreen: {
+    screen: StudentsScreen,
+  },
+  PointsScreen: {
+    screen: PointsScreen,
+  }
 },
 {
   transitionConfig: () => StackViewTransitionConfigs.SlideFromRightIOS,
