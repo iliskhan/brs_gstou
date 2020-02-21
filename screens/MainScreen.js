@@ -69,8 +69,14 @@ const styles = StyleSheet.create({
     width: '65%',
     backgroundColor: '#7B88D3',
     alignItems: 'center',
-    shadowColor: 'rgba(123, 136, 211, 0.25)',
-    shadowOpacity: 0.1,
+
+    shadowColor: "#7B88D3",
+    shadowOpacity: 0.24,
+    // shadowRadius: 16,
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
     elevation: 4,
   },
   textStyle: {

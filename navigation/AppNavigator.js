@@ -79,7 +79,8 @@ const MyStackNavigator = createStackNavigator({
           >
             <Image 
               source={images.arrow_left}
-              style={{width: 12, height: 21}}/>
+              style={{width: 12, height: 21}}
+            />
           </TouchableOpacity>
           <Text style={styles.title}>БРС ГГНТУ</Text>
           <View style={{width: '20%'}}/>

@@ -22,7 +22,7 @@ const circleWH = Math.round(screenW / 7.5);
 const data = [
   {
     disciplineName: 'Программирование',
-    disciplineType: 'Экзамен',
+    disciplineType: 'ЭКЗАМЕН',
     discipline: undefined,
     points: 81,
     detailed: [
@@ -42,7 +42,7 @@ const data = [
   },
   {
     disciplineName: 'Математика',
-    disciplineType: 'Экзамен',
+    disciplineType: 'ЭКЗАМЕН',
     discipline: undefined,
     points: 61,
     detailed: [
@@ -62,7 +62,7 @@ const data = [
   },
   {
     disciplineName: 'Иностранный язык',
-    disciplineType: 'Зачет',
+    disciplineType: 'ЗАЧЕТ',
     discipline: undefined,
     points: 41,
     detailed: [
@@ -82,7 +82,7 @@ const data = [
   },
   {
     disciplineName: 'Философия',
-    disciplineType: 'Зачет',
+    disciplineType: 'ЗАЧЕТ',
     discipline: undefined,
     points: 100,
     detailed: [
@@ -102,7 +102,7 @@ const data = [
   },
   {
     disciplineName: 'История',
-    disciplineType: 'Зачет',
+    disciplineType: 'ЗАЧЕТ',
     discipline: undefined,
     points: 39,
     detailed: [
@@ -125,6 +125,17 @@ export default class PointsScreen extends Component {
 
   state = {
     student: this.props.navigation.state.params.student,
+    openCards: [],
+  }
+
+  cardsDeleter = (item) => {
+    let arr = this.state.openCards;
+    for( var i = 0; i < arr.length; i++){ 
+      if ( arr[i] === item) {
+        arr.splice(i, 1); 
+      }
+    }
+    return arr
   }
 
   render() {
@@ -134,43 +145,115 @@ export default class PointsScreen extends Component {
         style={styles.container}    
       >
         <Text style={styles.label}>Баллы</Text>
-        {/* <Text>{this.state.student}</Text> */}
           <View style={styles.scrollView}>
             <ScrollView
               contentContainerStyle={styles.scrollViewContent}
-              // automaticallyAdjustContentInsets={true}
             >
               {data.map(
                 (dataItem, idx) => 
                   <TouchableOpacity
                     key={idx}
-                    style={styles.pointsCard}
-                    // onPress={}            
+                    style={(this.state.openCards.indexOf(idx) === -1) ? 
+                      styles.pointsCard:
+                      [styles.pointsCard, {backgroundColor: '#7B88D3'}]
+                    }
+                    onPress={() => {
+                      if (this.state.openCards.indexOf(idx) === -1){
+                        this.setState(state => {
+                          return {openCards: [...state.openCards, idx]}
+                        })
+                      } else {
+                        this.setState(() => {
+                          return {openCards: this.cardsDeleter(idx)}
+                        })
+                      }
+                    }}            
                   >
-                    <View style={{width: Math.round(screenW/1.5), margin: '2.5%'}}>
-                      <Text 
-                        style={
-                          (dataItem.disciplineType === 'Экзамен') ?
-                          styles.disciplineType:
-                          [styles.disciplineType, {color: '#C0C6FE'}]
-                        }
+                    <View style={{
+                      flex: 1,
+                      flexDirection: 'row',
+                      // justifyContent: 'space-around'
+                      // backgroundColor: 'black',
+                    }}>
+                      <View 
+                        style={{
+                          flex:2,
+                          width: Math.round(screenW/1.5),
+                          marginTop: Math.round(screenW/34)
+                        }}
                       >
-                        {dataItem.disciplineType}
-                      </Text>
-                      <Text
-                        style={styles.disciplineName}
-                      >
-                        {dataItem.disciplineName}
-                      </Text>
+                        <Text 
+                          style={
+                            (dataItem.disciplineType === 'ЭКЗАМЕН') ?
+                            styles.disciplineType:
+                            [styles.disciplineType, {color: '#C0C6FE'}]
+                          }
+                        >
+                          {dataItem.disciplineType}
+                        </Text>
+                        <Text
+                          style={(this.state.openCards.indexOf(idx) === -1) ?
+                            styles.disciplineName:
+                            [styles.disciplineName, {color: '#FCFCFF'}]
+                          }
+                        >
+                          {dataItem.disciplineName}
+                        </Text>
+                      </View>
+                      <View style={styles.pointsCircle}>
+                        <Text
+                          style={styles.points}
+                        >
+                          {dataItem.points}
+                        </Text>
+                      </View>
                     </View>
-                    <View style={styles.pointsCircle}>
-                      <Text
-                        style={styles.points}
+                    {(this.state.openCards.indexOf(idx) !== -1) ?
+                      <View 
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                          marginTop: Math.round(screenW/25),
+                          paddingHorizontal: Math.round(screenW/20)
+                        }}
                       >
-                        {dataItem.points}
-                      </Text>
-                    </View>
-                    {/* <View></View> */}
+                        {dataItem.detailed.map((detailedItem, idx) => 
+                          <View 
+                            key={idx}
+                            style={{
+                              // backgroundColor: 'white',
+                              // paddingHorizontal: Math.round(screenW/25),
+                            }}>
+                            <Text 
+                              style={styles.disciplineType, {color: '#C0C6FE'}}
+                            >
+                                {idx+1}-Я АТТЕСТАЦИЯ
+                            </Text>
+                            <Text 
+                              style={styles.detailedPoints}
+                            >
+                              Посещаемость   {detailedItem.attendance}
+                            </Text>
+                            <Text 
+                              style={styles.detailedPoints}
+                            >
+                              Текущая атт.   {detailedItem.currentSertification}
+                            </Text>
+                            <Text 
+                              style={styles.detailedPoints}
+                            >
+                              Рубежная атт.  {detailedItem.midtermSertification}
+                            </Text>
+                            <Text 
+                              style={styles.detailedPoints}
+                            >
+                              Самост. работа {detailedItem.attendance}
+                            </Text>
+                          </View>
+                        )}
+                      </View>:
+                      null
+                    }
                   </TouchableOpacity>
                 )
               }
@@ -210,35 +293,53 @@ const styles = StyleSheet.create({
     
   },
   pointsCard: {
-    flexDirection: 'row',
-    height: Math.round(screenW/3.5),
-    marginBottom: Math.round(screenW/18),
+    // flexDirection: 'row',
+    // flexGrow:1 ,
+    // height: Math.round(screenW/3.5),
+    marginBottom: Math.round(screenW/20),
+    paddingBottom: Math.round(screenW/20),
     marginHorizontal: '4%',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
-    shadowColor: "rgba(123, 136, 211, 0.16)",
-    elevation: 4,
+    shadowColor: "#7B88D3",
+    shadowOpacity: 0.16,
+    shadowRadius: 16,
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    // elevation: 1
   },
   pointsCircle: {
+    marginRight: Math.round(screenW/20),
+    marginTop: Math.round(screenW/20),
     backgroundColor: '#E0E4FF',
     width: circleWH,
     height: circleWH,
     borderRadius: Math.round(circleWH/2),
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center',
+    // alignSelf: 'center',
+  },
+  detailedPoints: {
+    color: '#E0E4FF',
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: 13,
+    lineHeight: 18,
+    letterSpacing: -0.08,
   },
   disciplineType: {
-    marginLeft: '2%',
+    marginLeft: Math.round(screenW/20),
     color: '#F59C62',
     fontStyle: 'normal',
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: 13,
     lineHeight: 18,
-    letterSpacing: -0.078,
+    letterSpacing: -0.08,
   },
   disciplineName: {
-    marginLeft: '2%',
+    marginLeft: Math.round(screenW/20),
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: 22,
