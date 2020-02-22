@@ -220,29 +220,26 @@ export default class PointsScreen extends Component {
                         {dataItem.detailed.map((detailedItem, idx) => 
                           <View 
                             key={idx}
-                            style={{
-                              // backgroundColor: 'white',
-                              // paddingHorizontal: Math.round(screenW/25),
-                            }}>
+                          >
                             <Text 
-                              style={styles.disciplineType, {color: '#C0C6FE'}}
+                              style={styles.disciplineType, {color: '#C0C6FE', marginBottom: Math.round(screenW / 37)}}
                             >
                                 {idx+1}-Я АТТЕСТАЦИЯ
                             </Text>
                             <Text 
                               style={styles.detailedPoints}
                             >
-                              Посещаемость   {detailedItem.attendance}
+                              Посещаемость {detailedItem.attendance}
                             </Text>
                             <Text 
                               style={styles.detailedPoints}
                             >
-                              Текущая атт.   {detailedItem.currentSertification}
+                              Текущая атт. {detailedItem.currentSertification}
                             </Text>
                             <Text 
                               style={styles.detailedPoints}
                             >
-                              Рубежная атт.  {detailedItem.midtermSertification}
+                              Рубежная атт. {detailedItem.midtermSertification}
                             </Text>
                             <Text 
                               style={styles.detailedPoints}
@@ -272,7 +269,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#FCFCFF',
-    // fontFamily: 'SF Pro Display',
+    fontFamily: 'SF-PRO-Text',
     fontStyle: 'normal',
     fontWeight: 'bold',
     fontSize: 34,
@@ -297,7 +294,7 @@ const styles = StyleSheet.create({
     // flexGrow:1 ,
     // height: Math.round(screenW/3.5),
     marginBottom: Math.round(screenW/20),
-    paddingBottom: Math.round(screenW/20),
+    paddingBottom: Math.round(screenW/15),
     marginHorizontal: '4%',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
@@ -308,11 +305,11 @@ const styles = StyleSheet.create({
       width: 0,
       height: 8,
     },
-    // elevation: 1
+    elevation: 4
   },
   pointsCircle: {
     marginRight: Math.round(screenW/20),
-    marginTop: Math.round(screenW/20),
+    marginTop: Math.round(screenW/15),
     backgroundColor: '#E0E4FF',
     width: circleWH,
     height: circleWH,
@@ -330,6 +327,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.08,
   },
   disciplineType: {
+    fontFamily: 'SF-PRO-Text',
     marginLeft: Math.round(screenW/20),
     color: '#F59C62',
     fontStyle: 'normal',
@@ -339,6 +337,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.08,
   },
   disciplineName: {
+    fontFamily: 'SF-PRO-Text',
     marginLeft: Math.round(screenW/20),
     fontStyle: 'normal',
     fontWeight: 'bold',

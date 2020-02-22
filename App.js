@@ -34,6 +34,7 @@ export default class App extends Component {
   async _loadFontsAsync() {
     return await Font.loadAsync({
       'SF-UI-Text': require('./assets/fonts/SFUIText-Regular.ttf'),
+      'SF-PRO-Text': require('./assets/fonts/SFProDisplay-Regular.ttf'),
     });
   }
   

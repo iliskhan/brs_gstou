@@ -118,7 +118,7 @@ export default class GroupsScreen extends Component {
               key={key}
               onPress={() => {
                 this.setState({
-                  group_name : group_name,
+                  group_name: group_name,
                 }, 
                 () => this.props.navigation.navigate(
                   'StudentsScreen', 
@@ -134,7 +134,7 @@ export default class GroupsScreen extends Component {
               <Text 
                 style={
                   (this.state.group_name == group_name) ?
-                    [styles.selected_button_text, {color: 'white', fontWeight: 'bold'}] :
+                    [styles.selected_button_text, {color: 'white', fontWeight: 'bold', fontFamily: 'SF-PRO-Text'}] :
                     [styles.not_selected_button_text, {color: 'white'}]
                   }
                 > 

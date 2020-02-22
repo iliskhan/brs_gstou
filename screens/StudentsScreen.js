@@ -34,27 +34,32 @@ export default class StudentsScreen extends Component {
         colors={['#7B88D3', '#5B4CAB']}
         style={styles.container}
       >
-        <Text style={styles.groupLabel}>
-          {`Студенты группы ${this.state.group_name}`}
-        </Text>
-        <ScrollView
-          contentContainerStyle={styles.scrollStyle}>
-          {this.state.students.map( (student, index) => 
-            <TouchableOpacity 
-              key={index}
-              style={styles.studentContainButton}
-              onPress={() => this.props.navigation.navigate(
-                'PointsScreen', 
-                {
-                  student,
-                },
-              )}
-            >
-              <Text>{student}</Text>
-            </TouchableOpacity>
-            ) 
-          }
+        <Text style={styles.label}>{`Студенты ${this.state.group_name}`}</Text>
+        <View style={styles.scrollView}>
+          <ScrollView
+            contentContainerStyle={styles.scrollViewContent}
+          >
+            {this.state.students.map((student, index) => 
+              <TouchableOpacity 
+                key={index}
+                style={styles.studentContainButton}
+                onPress={() => this.props.navigation.navigate(
+                  'PointsScreen', 
+                  {
+                    student,
+                  },
+                )}
+              >
+                <Text
+                  style={styles.studentName}
+                >
+                  {student}
+                </Text>
+              </TouchableOpacity>
+              ) 
+            }
         </ScrollView>
+        </View>
       </LinearGradient>
     )
   }
@@ -62,32 +67,51 @@ export default class StudentsScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    
-    paddingTop: Math.floor(screenW / 7),
     flex: 1,
+    paddingTop: Math.floor(screenW / 7),
     backgroundColor: '#E5E5E5',
   },
-  groupLabel: {
-    marginTop: '2.5%',
-    fontFamily: 'SF-UI-Text',
+  label: {
+    color: '#FCFCFF',
+    fontFamily: 'SF-PRO-Text',
     fontStyle: 'normal',
-    fontWeight: '500',
-    fontSize: 15,
-    lineHeight: 22,
-    letterSpacing: -0.41,
-    color: 'white',
-    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 34,
+    letterSpacing: 0.41,
+    marginLeft: '5%',
+    marginBottom: Math.round(screenW/20),
   },
   studentContainButton: {
-    marginHorizontal: '2%',
-    marginVertical: '3%',
-    paddingLeft: '3%',
-    backgroundColor: 'white',
-    borderRadius: 5,
-    opacity: 0.5,
+    marginHorizontal: Math.round(screenW/30),
+    marginVertical: Math.round(screenW/50),
+    backgroundColor: '#FCFCFF',
+    borderRadius: 6,
+    shadowColor: "rgba(123, 136, 211, 0.28)",
+    shadowOpacity: 0.28,
+    // shadowRadius: 16,
+    shadowOffset: {
+      width: 4,
+      height: 8,
+    },
+    elevation: 4,
   },
-  scrollStyle: {
-    // height: '100%',
-    // backgroundColor: 'black',
-  }
+  studentName: {
+    marginLeft: Math.round(screenW / 23),
+    marginVertical: Math.round(screenW/ 25),
+    fontSize: 15,
+    lineHeight: 20,
+    color: '#7B88D3',
+  },
+  scrollView: {
+    flex: 1,
+    backgroundColor: '#EEF0FF',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    marginHorizontal: '2%',
+    paddingTop: Math.round(screenW/37),
+    
+  },
 })
