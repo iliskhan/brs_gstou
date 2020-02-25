@@ -14,6 +14,8 @@ import {
 import { LinearGradient } from 'expo-linear-gradient'
 import { images } from '../constants/Images'
 
+import axios from 'axios';
+
 const screenW = Math.round(Dimensions.get('window').width);  
 const screenH = Math.round(Dimensions.get('window').height);
 
@@ -24,10 +26,15 @@ const courses = 4
 export default class GroupsScreen extends Component {
 
   state = {
+    groups_names: undefined,
     group_name: undefined,
     selected_course: 1,
     inst_name: institutes_names[2],
     courses: [...Array(courses).keys()].map(i => ++i)
+  }
+
+  componentDidMount() {
+    axios.get('b3fcd671.ngrok.io/institutes/ипит/courses/1').then(response => console.log(response))
   }
 
   render() {
@@ -127,16 +134,10 @@ export default class GroupsScreen extends Component {
                     students: [...Array(15).keys()].map(i => `студент ${++i}`)} )
                 )}
               }
-              style={(this.state.group_name == group_name) ? 
-                styles.selected_group_button : 
-                styles.group_button}
+              style={styles.group_button}
             >
               <Text 
-                style={
-                  (this.state.group_name == group_name) ?
-                    [styles.selected_button_text, {color: 'white', fontWeight: 'bold', fontFamily: 'SF-PRO-Text'}] :
-                    [styles.not_selected_button_text, {color: 'white'}]
-                  }
+                style={[styles.not_selected_button_text, {color: 'white'}]}
                 > 
                 {group_name} 
               </Text>
