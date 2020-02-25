@@ -68,7 +68,7 @@ export default class StudentsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Math.floor(screenW / 7),
+    paddingTop: Math.floor(screenW / 5),
     backgroundColor: '#E5E5E5',
   },
   label: {

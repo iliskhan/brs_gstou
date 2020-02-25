@@ -23,6 +23,7 @@ const screenW = Math.round(Dimensions.get('window').width);
 
 const styles = StyleSheet.create({
   header: {
+    paddingTop: Math.round(screenW/7.5),
     flexDirection: 'row',
     position:'absolute',
     height: Math.floor(screenW/6),

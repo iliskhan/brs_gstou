@@ -151,7 +151,7 @@ export default class GroupsScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: '10%',
+    paddingTop: Math.round(screenW / 5),
     flex: 1,
     backgroundColor: '#E5E5E5',
   },

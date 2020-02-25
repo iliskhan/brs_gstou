@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import {
-  FlatList,
   ScrollView,
   StyleSheet,
   Dimensions,
@@ -11,6 +10,7 @@ import {
   Image,
   } from "react-native";
 
+import { DetailedPoints } from '../components/DetailedPoints'
 import { LinearGradient } from 'expo-linear-gradient'
 import { images } from '../constants/Images'
 
@@ -226,26 +226,28 @@ export default class PointsScreen extends Component {
                             >
                                 {idx+1}-Я АТТЕСТАЦИЯ
                             </Text>
-                            <Text 
-                              style={styles.detailedPoints}
-                            >
-                              Посещаемость {detailedItem.attendance}
-                            </Text>
-                            <Text 
-                              style={styles.detailedPoints}
-                            >
-                              Текущая атт. {detailedItem.currentSertification}
-                            </Text>
-                            <Text 
-                              style={styles.detailedPoints}
-                            >
-                              Рубежная атт. {detailedItem.midtermSertification}
-                            </Text>
-                            <Text 
-                              style={styles.detailedPoints}
-                            >
-                              Самост. работа {detailedItem.attendance}
-                            </Text>
+
+                            <DetailedPoints 
+                              description={'Посещаемость'} 
+                              data={detailedItem.attendance} 
+                              styles={styles}
+                            />
+                            <DetailedPoints 
+                              description={'Текущая атт.'} 
+                              data={detailedItem.currentSertification} 
+                              styles={styles}
+                            />
+                            <DetailedPoints 
+                              description={'Рубежная атт.'} 
+                              data={detailedItem.midtermSertification} 
+                              styles={styles}
+                            />
+                            <DetailedPoints 
+                              description={'Самост. работа'} 
+                              data={detailedItem.independentWork} 
+                              styles={styles}
+                            />
+                            
                           </View>
                         )}
                       </View>:
@@ -263,7 +265,7 @@ export default class PointsScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Math.round(screenW / 7),
+    paddingTop: Math.round(screenW / 5),
     flex: 1,
     backgroundColor: '#E5E5E5',
   },
