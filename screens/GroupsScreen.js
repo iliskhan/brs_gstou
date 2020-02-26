@@ -16,11 +16,13 @@ import { images } from '../constants/Images'
 
 import axios from 'axios';
 
+const host = '30838f7e.ngrok.io'
+
 const screenW = Math.round(Dimensions.get('window').width);  
 const screenH = Math.round(Dimensions.get('window').height);
 
 const institutes_names = ['ИНГ', 'ИЭ', 'ИПИТ', 'ИСАД', 'ИЦЭТП']
-const groups_names = ['ПИ-18', 'ИСТ-18', 'БИС-18', 'БИН-18']
+// const groups_names = ['ПИ-18', 'ИСТ-18', 'БИС-18', 'БИН-18']
 const courses = 4
 
 export default class GroupsScreen extends Component {
@@ -33,8 +35,13 @@ export default class GroupsScreen extends Component {
     courses: [...Array(courses).keys()].map(i => ++i)
   }
 
+  getGroups = () => {
+    axios.get(`http://${host}/institutes/${this.state.inst_name.toLowerCase()}/course/${this.state.selected_course}`)
+      .then(response => this.setState({groups_names: response.data}))
+  }
+
   componentDidMount() {
-    axios.get('b3fcd671.ngrok.io/institutes/ипит/courses/1').then(response => console.log(response))
+    this.getGroups( 'ИПИТ', 1)
   }
 
   render() {
@@ -59,7 +66,7 @@ export default class GroupsScreen extends Component {
                 onPress={() => {
                   this.setState({
                     inst_name : item,
-                  }, () => {console.log(this.state)})
+                  }, this.getGroups)
                 }}
                 style={(this.state.inst_name == item) ? 
                   styles.selected_button: 
@@ -93,7 +100,7 @@ export default class GroupsScreen extends Component {
                 onPress={() => {
                   this.setState({
                     selected_course: course,
-                  })
+                  }, this.getGroups)
                 }}
                 style={(this.state.selected_course == course) ? 
                   styles.courses_button_selected: 
@@ -120,7 +127,8 @@ export default class GroupsScreen extends Component {
           <ScrollView
             contentContainerStyle={styles.group_selector}
           >
-            {groups_names.map((group_name, key) => 
+            {this.state.groups_names ?
+            this.state.groups_names.map((group_name, key) => 
               <TouchableOpacity
               key={key}
               onPress={() => {
@@ -142,7 +150,9 @@ export default class GroupsScreen extends Component {
                 {group_name} 
               </Text>
             </TouchableOpacity>
-            )}
+          ):
+          null
+        }
           </ScrollView>
         </View>
       </LinearGradient>
