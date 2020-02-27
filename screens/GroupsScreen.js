@@ -16,7 +16,7 @@ import { images } from '../constants/Images'
 
 import axios from 'axios';
 
-const host = '30838f7e.ngrok.io'
+const host = '76c53aa3.ngrok.io'
 
 const screenW = Math.round(Dimensions.get('window').width);  
 const screenH = Math.round(Dimensions.get('window').height);
@@ -51,8 +51,9 @@ export default class GroupsScreen extends Component {
         style={styles.container}
       >
         <View>
-          <Text style={styles.selection_text}> Выберите институт </Text>
+          <Text style={[styles.selection_text,{marginTop: '5%'}]}>Выберите институт</Text>
           <FlatList 
+            style={{paddingVertical: '5%'}}
             horizontal={true}
             ref={(ref) => { this.flatListRef = ref }}
             showsHorizontalScrollIndicator={false}
@@ -91,7 +92,7 @@ export default class GroupsScreen extends Component {
         
         <View style={styles.courses}>
           <Text style={styles.selection_text}> 
-            Выберите курс 
+            Выберите курс
           </Text>
           <View style={styles.course_selector}>
             { this.state.courses.map(course => 
@@ -165,15 +166,18 @@ const styles = StyleSheet.create({
     paddingTop: Math.round(screenW / 5),
     flex: 1,
     backgroundColor: '#E5E5E5',
+    // marginTop: '5%'
   },
   courses: {
     flex: 1,
+    // marginTop: '5%'
   },
   groups: {
-    flex: 4,
+    flex: 5,
+    marginVertical: Math.round(screenW/25)
   },
   selection_text: {
-    padding: '6%',
+    paddingLeft: '6%',
     color: '#C0C6FE',
     letterSpacing: -0.40,
     lineHeight: 22,
@@ -189,16 +193,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   course_selector: {
+    // flex: 1,
     // flexGrow: 1,
     height: Math.round(screenW/12.5),
     marginHorizontal: '4%',
+    marginTop: Math.round(screenW/ 25),
     alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row',
     backgroundColor: "#7B88D3",
     borderRadius: 8,
+    
   },
   group_selector: {
+    marginTop: '5%',
     flexGrow: 1,
     paddingHorizontal: '4%',
     justifyContent: 'space-between',
