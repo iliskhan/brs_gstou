@@ -13,11 +13,9 @@ import {
 
 import { LinearGradient } from 'expo-linear-gradient'
 import { images } from '../constants/Images'
+import { host } from '../constants/Host'
 
 import axios from 'axios';
-
-// const host = '668cdbb9.ngrok.io'
-import { host } from '../constants/Host'
 
 const screenW = Math.round(Dimensions.get('window').width);  
 const screenH = Math.round(Dimensions.get('window').height);
@@ -33,14 +31,27 @@ export default class GroupsScreen extends Component {
     group_name: undefined,
     selected_course: 1,
     inst_name: institutes_names[2],
-    courses: [...Array(courses).keys()].map(i => ++i)
+    courses: [...Array(courses).keys()].map(i => ++i),
+    isWaitingResponse: true,
   }
 
   getGroups = () => {
     axios.get(`${host}/institutes/${this.state.inst_name.toLowerCase()}/course/${this.state.selected_course}`)
-      .then(response => this.setState({groups_names: response.data}))
+      .then(response => 
+        this.setState({
+          groups_names: response.data, 
+          isWaitingResponse: false,
+        }))
   }
 
+  changeScreen = (group_name) => {
+    this.setState({group_name}, 
+    () => this.props.navigation.navigate(
+      'StudentsScreen', 
+      {
+        group_name, 
+      })
+    )}
   componentDidMount() {
     this.getGroups()
   }
@@ -68,6 +79,7 @@ export default class GroupsScreen extends Component {
                 onPress={() => {
                   this.setState({
                     inst_name : item,
+                    isWaitingResponse: true,
                   }, this.getGroups)
                 }}
                 style={(this.state.inst_name == item) ? 
@@ -103,6 +115,7 @@ export default class GroupsScreen extends Component {
                   onPress={() => {
                     this.setState({
                       selected_course: course,
+                      isWaitingResponse: true,
                     }, this.getGroups)
                   }}
                   style={(this.state.selected_course == course) ? 
@@ -131,33 +144,31 @@ export default class GroupsScreen extends Component {
           <ScrollView
             contentContainerStyle={styles.group_selector}
           >
-            {this.state.groups_names ?
-            this.state.groups_names.map((group_name, key) => 
+          {
+            this.state.isWaitingResponse ?
+            [...Array(8).keys()].map(i => 
+              <View
+                key={i}
+                style={styles.group_button}
+              >
+                <View  
+                  style={{backgroundColor: '#9DA7EE', height: '30%', width: '75%', opacity: 0.4}} 
+                />
+              </View>) :
+              this.state.groups_names.map((group_name, key) => 
               <TouchableOpacity
-              key={key}
-              onPress={() => {
-                this.setState({
-                  group_name: group_name,
-                }, 
-                () => this.props.navigation.navigate(
-                  'StudentsScreen', 
-                  {
-                    group_name, 
-                    // students: [...Array(15).keys()].map(i => `студент ${++i}`)
-                  })
-                )}
-              }
-              style={styles.group_button}
-            >
-              <Text 
-                style={[styles.not_selected_button_text, {color: 'white'}]}
+                key={key}
+                onPress={() => this.changeScreen(group_name)}
+                style={styles.group_button}
+              >
+                <Text 
+                  style={[styles.not_selected_button_text, {color: 'white'}]}
                 > 
-                {group_name} 
-              </Text>
-            </TouchableOpacity>
-          ):
-          null
-        }
+                  {group_name} 
+                </Text>
+              </TouchableOpacity>
+              )
+          }
           </ScrollView>
         </View>
       </LinearGradient>
@@ -194,11 +205,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   course_selector: {
-    // flex: 1,
-    // flexGrow: 1,
     height: Math.round(screenW/12.5),
     marginHorizontal: '4%',
-    // marginVertical: Math.round(screenW/ 25),
     alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row',
@@ -246,7 +254,6 @@ const styles = StyleSheet.create({
   courses_button_selected: {
     flex: 1,
     height: '85%',
-    // paddingVertical: '1%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#C0C6FE',

@@ -26,7 +26,6 @@ export default class StudentsScreen extends Component {
 
   state = {
     group_name: this.props.navigation.state.params.group_name,
-    // students: this.props.navigation.state.params.students,
     students: undefined,
   }
   componentDidMount() {
