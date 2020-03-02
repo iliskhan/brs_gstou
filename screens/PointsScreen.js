@@ -144,12 +144,12 @@ export default class PointsScreen extends Component {
                             />
                             <DetailedPoints 
                               description={'Текущая атт.'} 
-                              data={detailedItem.currentSertification} 
+                              data={detailedItem.currentCertification} 
                               styles={styles}
                             />
                             <DetailedPoints 
                               description={'Рубежная атт.'} 
-                              data={detailedItem.midtermSertification} 
+                              data={detailedItem.midtermCertification} 
                               styles={styles}
                             />
                             <DetailedPoints 
@@ -203,9 +203,6 @@ const styles = StyleSheet.create({
     
   },
   pointsCard: {
-    // flexDirection: 'row',
-    // flexGrow:1 ,
-    // height: Math.round(screenW/3.5),
     marginBottom: Math.round(screenW/20),
     paddingBottom: Math.round(screenW/15),
     marginHorizontal: '4%',
@@ -229,7 +226,7 @@ const styles = StyleSheet.create({
     borderRadius: Math.round(circleWH/2),
     justifyContent: 'center',
     alignItems: 'center',
-    // alignSelf: 'center',
+    
   },
   detailedPoints: {
     color: '#E0E4FF',

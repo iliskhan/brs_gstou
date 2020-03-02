@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   group_selector: {
     paddingVertical: Math.round(screenW / 25),
     flexGrow: 1,
-    paddingLeft: Math.round(screenW / 20),
+    paddingLeft: Math.round(screenW / 22.5),
     flexDirection: 'row',
     flexWrap: 'wrap',
 

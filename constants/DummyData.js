@@ -7,14 +7,14 @@ const points = [
       detailed: [
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
       ]
@@ -27,14 +27,14 @@ const points = [
       detailed: [
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
       ]
@@ -47,14 +47,14 @@ const points = [
       detailed: [
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
       ]
@@ -67,14 +67,14 @@ const points = [
       detailed: [
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
       ]
@@ -87,14 +87,14 @@ const points = [
       detailed: [
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
         {
           attendance: 3,
-          currentSertification: 5,
-          midtermSertification: 5,
+          currentCertification: 5,
+          midtermCertification: 5,
           independentWork: 0,
         },
       ]
