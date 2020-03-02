@@ -16,7 +16,8 @@ import { images } from '../constants/Images'
 
 import axios from 'axios';
 
-const host = '76c53aa3.ngrok.io'
+// const host = '668cdbb9.ngrok.io'
+import { host } from '../constants/Host'
 
 const screenW = Math.round(Dimensions.get('window').width);  
 const screenH = Math.round(Dimensions.get('window').height);
@@ -36,12 +37,12 @@ export default class GroupsScreen extends Component {
   }
 
   getGroups = () => {
-    axios.get(`http://${host}/institutes/${this.state.inst_name.toLowerCase()}/course/${this.state.selected_course}`)
+    axios.get(`${host}/institutes/${this.state.inst_name.toLowerCase()}/course/${this.state.selected_course}`)
       .then(response => this.setState({groups_names: response.data}))
   }
 
   componentDidMount() {
-    this.getGroups( 'ИПИТ', 1)
+    this.getGroups()
   }
 
   render() {
@@ -51,9 +52,9 @@ export default class GroupsScreen extends Component {
         style={styles.container}
       >
         <View>
-          <Text style={[styles.selection_text,{marginTop: '5%'}]}>Выберите институт</Text>
+          <Text style={[styles.selection_text,{marginTop: Math.round(screenW / 20)}]}>Выберите институт</Text>
           <FlatList 
-            style={{paddingVertical: '5%'}}
+            style={{paddingVertical: Math.round(screenW / 20)}}
             horizontal={true}
             ref={(ref) => { this.flatListRef = ref }}
             showsHorizontalScrollIndicator={false}
@@ -94,28 +95,30 @@ export default class GroupsScreen extends Component {
           <Text style={styles.selection_text}> 
             Выберите курс
           </Text>
-          <View style={styles.course_selector}>
-            { this.state.courses.map(course => 
-              <TouchableOpacity
-                key={course}
-                onPress={() => {
-                  this.setState({
-                    selected_course: course,
-                  }, this.getGroups)
-                }}
-                style={(this.state.selected_course == course) ? 
-                  styles.courses_button_selected: 
-                  styles.courses_button}
-                >
-                  <Text 
-                    style={(this.state.selected_course == course) ? 
-                      [styles.courses_text, {color: 'white'}]:
-                      styles.courses_text}
+          <View style={{flex:1, justifyContent: 'center'}}>
+            <View style={styles.course_selector}>
+              { this.state.courses.map(course => 
+                <TouchableOpacity
+                  key={course}
+                  onPress={() => {
+                    this.setState({
+                      selected_course: course,
+                    }, this.getGroups)
+                  }}
+                  style={(this.state.selected_course == course) ? 
+                    styles.courses_button_selected: 
+                    styles.courses_button}
                   >
-                    {course}
-                </Text>
-              </TouchableOpacity>) 
-            }
+                    <Text 
+                      style={(this.state.selected_course == course) ? 
+                        [styles.courses_text, {color: 'white'}]:
+                        styles.courses_text}
+                    >
+                      {course}
+                  </Text>
+                </TouchableOpacity>) 
+              }
+            </View>
           </View>
         </View>
 
@@ -140,7 +143,8 @@ export default class GroupsScreen extends Component {
                   'StudentsScreen', 
                   {
                     group_name, 
-                    students: [...Array(15).keys()].map(i => `студент ${++i}`)} )
+                    // students: [...Array(15).keys()].map(i => `студент ${++i}`)
+                  })
                 )}
               }
               style={styles.group_button}
@@ -166,15 +170,12 @@ const styles = StyleSheet.create({
     paddingTop: Math.round(screenW / 5),
     flex: 1,
     backgroundColor: '#E5E5E5',
-    // marginTop: '5%'
   },
   courses: {
     flex: 1,
-    // marginTop: '5%'
   },
   groups: {
     flex: 5,
-    marginVertical: Math.round(screenW/25)
   },
   selection_text: {
     paddingLeft: '6%',
@@ -197,7 +198,7 @@ const styles = StyleSheet.create({
     // flexGrow: 1,
     height: Math.round(screenW/12.5),
     marginHorizontal: '4%',
-    marginTop: Math.round(screenW/ 25),
+    // marginVertical: Math.round(screenW/ 25),
     alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row',
@@ -206,16 +207,17 @@ const styles = StyleSheet.create({
     
   },
   group_selector: {
-    marginTop: '5%',
+    paddingVertical: Math.round(screenW / 25),
     flexGrow: 1,
-    paddingHorizontal: '4%',
-    justifyContent: 'space-between',
+    paddingLeft: Math.round(screenW / 20),
     flexDirection: 'row',
     flexWrap: 'wrap',
+
   },
   group_button: {
     opacity: 0.4,
-    marginBottom: '4%',
+    marginRight: Math.round(screenW / 20),
+    marginBottom: Math.round(screenW / 25),
     backgroundColor: '#7B88D3',
     borderRadius: 10,
     height:Math.round((screenW/4)/1.5),

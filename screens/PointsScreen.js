@@ -12,119 +12,24 @@ import {
 
 import { DetailedPoints } from '../components/DetailedPoints'
 import { LinearGradient } from 'expo-linear-gradient'
+import { points } from '../constants/DummyData'
 import { images } from '../constants/Images'
+import { host } from '../constants/Host'
+import axios from "axios";
+
+const data = points
 
 const screenW = Math.round(Dimensions.get('window').width);  
 const screenH = Math.round(Dimensions.get('window').height);
 
 const circleWH = Math.round(screenW / 7.5);
 
-const data = [
-  {
-    disciplineName: 'Программирование',
-    disciplineType: 'ЭКЗАМЕН',
-    discipline: undefined,
-    points: 81,
-    detailed: [
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-    ]
-  },
-  {
-    disciplineName: 'Математика',
-    disciplineType: 'ЭКЗАМЕН',
-    discipline: undefined,
-    points: 61,
-    detailed: [
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-    ]
-  },
-  {
-    disciplineName: 'Иностранный язык',
-    disciplineType: 'ЗАЧЕТ',
-    discipline: undefined,
-    points: 41,
-    detailed: [
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-    ]
-  },
-  {
-    disciplineName: 'Философия',
-    disciplineType: 'ЗАЧЕТ',
-    discipline: undefined,
-    points: 100,
-    detailed: [
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-    ]
-  },
-  {
-    disciplineName: 'История',
-    disciplineType: 'ЗАЧЕТ',
-    discipline: undefined,
-    points: 39,
-    detailed: [
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-      {
-        attendance: 3,
-        currentSertification: 5,
-        midtermSertification: 5,
-        independentWork: 0,
-      },
-    ]
-  }
-]
+
 export default class PointsScreen extends Component {
 
   state = {
     student: this.props.navigation.state.params.student,
+    data: undefined,
     openCards: [],
   }
 
@@ -138,6 +43,12 @@ export default class PointsScreen extends Component {
     return arr
   }
 
+  componentDidMount() {
+    console.log(this.state.student[1])
+    axios.get(`${host}/students/${this.state.student[1]}/points`)
+      .then(response => this.setState({ data: response.data }))
+  }
+
   render() {
     return (
       <LinearGradient
@@ -149,7 +60,8 @@ export default class PointsScreen extends Component {
             <ScrollView
               contentContainerStyle={styles.scrollViewContent}
             >
-              {data.map(
+              {this.state.data ?
+              this.state.data.map(
                 (dataItem, idx) => 
                   <TouchableOpacity
                     key={idx}
@@ -172,8 +84,6 @@ export default class PointsScreen extends Component {
                     <View style={{
                       flex: 1,
                       flexDirection: 'row',
-                      // justifyContent: 'space-around'
-                      // backgroundColor: 'black',
                     }}>
                       <View 
                         style={{
@@ -184,12 +94,12 @@ export default class PointsScreen extends Component {
                       >
                         <Text 
                           style={
-                            (dataItem.disciplineType === 'ЭКЗАМЕН') ?
+                            (dataItem.disciplineType === 'Экзамен') ?
                             styles.disciplineType:
                             [styles.disciplineType, {color: '#C0C6FE'}]
                           }
                         >
-                          {dataItem.disciplineType}
+                          {dataItem.disciplineType.toUpperCase()}
                         </Text>
                         <Text
                           style={(this.state.openCards.indexOf(idx) === -1) ?
@@ -254,7 +164,8 @@ export default class PointsScreen extends Component {
                       null
                     }
                   </TouchableOpacity>
-                )
+                ) :
+                null
               }
             </ScrollView>
           </View>

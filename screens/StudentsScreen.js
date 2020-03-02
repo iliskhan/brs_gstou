@@ -13,6 +13,10 @@ import {
 
 import { LinearGradient } from 'expo-linear-gradient'
 import { images } from '../constants/Images'
+import { host } from '../constants/Host'
+
+import axios from 'axios'
+
 import PointsScreen from "./PointsScreen";
 
 const screenW = Math.round(Dimensions.get('window').width);  
@@ -22,11 +26,13 @@ export default class StudentsScreen extends Component {
 
   state = {
     group_name: this.props.navigation.state.params.group_name,
-    students: this.props.navigation.state.params.students,
+    // students: this.props.navigation.state.params.students,
+    students: undefined,
   }
-  // componentDidMount() {
-  //   console.log(this.state)
-  // }
+  componentDidMount() {
+    axios.get(`${host}/groups/${this.state.group_name}/students`)
+      .then(response => this.setState({students: response.data}))
+  }
 
   render() {
     return (
@@ -39,24 +45,26 @@ export default class StudentsScreen extends Component {
           <ScrollView
             contentContainerStyle={styles.scrollViewContent}
           >
-            {this.state.students.map((student, index) => 
-              <TouchableOpacity 
-                key={index}
-                style={styles.studentContainButton}
-                onPress={() => this.props.navigation.navigate(
-                  'PointsScreen', 
-                  {
-                    student,
-                  },
-                )}
+            {this.state.students ?
+            this.state.students.map((student, index) => 
+            <TouchableOpacity 
+              key={index}
+              style={styles.studentContainButton}
+              onPress={() => this.props.navigation.navigate(
+                'PointsScreen', 
+                {
+                  student,
+                },
+              )}
+            >
+              <Text
+                style={styles.studentName}
               >
-                <Text
-                  style={styles.studentName}
-                >
-                  {student}
-                </Text>
-              </TouchableOpacity>
-              ) 
+                {student[0]}
+              </Text>
+            </TouchableOpacity>
+            ) :
+            null
             }
         </ScrollView>
         </View>
