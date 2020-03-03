@@ -1,3 +1,3 @@
-const host = 'http://ff04f264.ngrok.io'
+const host = 'http://bb7b73b9.ngrok.io'
 
 export { host }

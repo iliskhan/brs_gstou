@@ -17,8 +17,6 @@ import { host } from '../constants/Host'
 
 import axios from 'axios'
 
-import PointsScreen from "./PointsScreen";
-
 const screenW = Math.round(Dimensions.get('window').width);  
 const screenH = Math.round(Dimensions.get('window').height);
 
@@ -27,10 +25,14 @@ export default class StudentsScreen extends Component {
   state = {
     group_name: this.props.navigation.state.params.group_name,
     students: undefined,
+    isWaitingResponse: true,
   }
   componentDidMount() {
     axios.get(`${host}/groups/${this.state.group_name}/students`)
-      .then(response => this.setState({students: response.data}))
+      .then(response => this.setState({
+        students: response.data, 
+        isWaitingResponse: false,
+      }))
   }
 
   render() {
@@ -44,28 +46,44 @@ export default class StudentsScreen extends Component {
           <ScrollView
             contentContainerStyle={styles.scrollViewContent}
           >
-            {this.state.students ?
-            this.state.students.map((student, index) => 
-            <TouchableOpacity 
-              key={index}
-              style={styles.studentContainButton}
-              onPress={() => this.props.navigation.navigate(
-                'PointsScreen', 
-                {
-                  student,
-                },
-              )}
-            >
-              <Text
-                style={styles.studentName}
-              >
-                {student[0]}
-              </Text>
-            </TouchableOpacity>
-            ) :
-            null
+            {
+              this.state.isWaitingResponse ?
+              [...Array(15).keys()].map((student, index) => 
+                <View
+                  key={index} 
+                  style={[styles.studentContainButton, {flex: 1}]}
+                >
+                  <View 
+                    style={{
+                      alignSelf: 'center',
+                      backgroundColor: '#9DA7EE', 
+                      height: Math.round(screenW * 0.055), 
+                      width: Math.round(screenW * 0.8), 
+                      opacity: 0.4,
+                      marginVertical: Math.round(screenW * 0.03),
+                    }}
+                  />
+                </View>) :
+                this.state.students.map((student, index) => 
+                <TouchableOpacity 
+                  key={index}
+                  style={styles.studentContainButton}
+                  onPress={() => this.props.navigation.navigate(
+                    'PointsScreen', 
+                    {
+                      student,
+                    },
+                  )}
+                >
+                  <Text
+                    style={styles.studentName}
+                  >
+                    {student[0]}
+                  </Text>
+                </TouchableOpacity>
+                )
             }
-        </ScrollView>
+          </ScrollView>
         </View>
       </LinearGradient>
     )
@@ -95,7 +113,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     shadowColor: "rgba(123, 136, 211, 0.28)",
     shadowOpacity: 0.28,
-    // shadowRadius: 16,
     shadowOffset: {
       width: 4,
       height: 8,
@@ -104,7 +121,7 @@ const styles = StyleSheet.create({
   },
   studentName: {
     marginLeft: Math.round(screenW / 23),
-    marginVertical: Math.round(screenW/ 25),
+    marginVertical: Math.round(screenW * 0.03),
     fontSize: 15,
     lineHeight: 20,
     color: '#7B88D3',
@@ -119,6 +136,5 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     marginHorizontal: '2%',
     paddingTop: Math.round(screenW/37),
-    
   },
 })
