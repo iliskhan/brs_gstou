@@ -7,20 +7,17 @@ import {
   View,
   TouchableOpacity,
   Text,
-  Image,
   } from "react-native";
 
 import { DetailedPoints } from '../components/DetailedPoints'
 import { LinearGradient } from 'expo-linear-gradient'
-import { points } from '../constants/DummyData'
-import { images } from '../constants/Images'
+// import { points } from '../constants/DummyData'
 import { host } from '../constants/Host'
 import axios from "axios";
 
-const data = points
+// const data = points
 
-const screenW = Math.round(Dimensions.get('window').width);  
-const screenH = Math.round(Dimensions.get('window').height);
+const screenW = Math.round(Dimensions.get('window').width); 
 
 const circleWH = Math.round(screenW / 7.5);
 
@@ -44,7 +41,6 @@ export default class PointsScreen extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.student[1])
     axios.get(`${host}/students/${this.state.student[1]}/points`)
       .then(response => this.setState({ data: response.data }))
   }
@@ -65,12 +61,12 @@ export default class PointsScreen extends Component {
                 (dataItem, idx) => 
                   <TouchableOpacity
                     key={idx}
-                    style={(this.state.openCards.indexOf(idx) === -1) ? 
+                    style={(!this.state.openCards.includes(idx)) ? 
                       styles.pointsCard:
                       [styles.pointsCard, {backgroundColor: '#7B88D3'}]
                     }
                     onPress={() => {
-                      if (this.state.openCards.indexOf(idx) === -1){
+                      if (!this.state.openCards.includes(idx)){
                         this.setState(state => {
                           return {openCards: [...state.openCards, idx]}
                         })
@@ -102,7 +98,7 @@ export default class PointsScreen extends Component {
                           {dataItem.disciplineType.toUpperCase()}
                         </Text>
                         <Text
-                          style={(this.state.openCards.indexOf(idx) === -1) ?
+                          style={(!this.state.openCards.includes(idx)) ?
                             styles.disciplineName:
                             [styles.disciplineName, {color: '#FCFCFF'}]
                           }
@@ -118,7 +114,7 @@ export default class PointsScreen extends Component {
                         </Text>
                       </View>
                     </View>
-                    {(this.state.openCards.indexOf(idx) !== -1) ?
+                    {(this.state.openCards.includes(idx)) ?
                       <View 
                         style={{
                           flexDirection: 'row',
@@ -165,7 +161,40 @@ export default class PointsScreen extends Component {
                     }
                   </TouchableOpacity>
                 ) :
-                null
+                [...Array(15).keys()].map(item => 
+                  <View
+                    key={item}
+                    style={[styles.pointsCard, {height: Math.round(screenW * 0.267), elevation: 0}]}
+                  >
+                    <View style={{flex:1, flexDirection: 'row'}}>
+                      <View 
+                        style={{
+                          flex:2,
+                          marginTop: Math.round(screenW * 0.045)
+                        }}
+                      >
+                        <View 
+                          style={{
+                            width: Math.round(screenW * 0.2),
+                            height: Math.round(screenW * 0.045),
+                            backgroundColor: '#C0C6FE',
+                            marginLeft: Math.round(screenW/20),
+                          }}
+                        />
+                        <View
+                          style={{
+                            width: Math.round(screenW * 0.5),
+                            height: Math.round(screenW * 0.05),
+                            marginTop: Math.round(screenW * 0.02),
+                            marginLeft: Math.round(screenW/20),
+                            backgroundColor: '#6D74CD'
+                          }}
+                        />
+                      </View>
+                      <View style={[styles.pointsCircle]}/>
+                    </View>
+                  </View>
+                )
               }
             </ScrollView>
           </View>

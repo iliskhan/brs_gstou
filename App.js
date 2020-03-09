@@ -1,15 +1,26 @@
-import React, { Component, useState } from 'react';
-import { Platform, StyleSheet, StatusBar, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text} from 'react-native';
 import AppNavigator from "./navigation/AppNavigator";
-import Constants from "expo-constants";
-import { AppLoading } from 'expo';  
+import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
+
+import NetInfo from "@react-native-community/netinfo";
+
 
 export default class App extends Component {
 
   state = {
     assetsLoaded: false,
+    isConnected: null,
   };
+
+  handleConnectionChange = (isConnected) => {
+    this.setState({isConnected})
+  }
+
+  componentDidMount() {
+    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectionChange);
+}
 
   render() {
     if (!this.state.assetsLoaded) {
@@ -23,9 +34,14 @@ export default class App extends Component {
     else {
       return (
         <View style={styles.container}>
-          {/* {Platform.OS === "ios" && <StatusBar barStyle="default" />} */}
           <AppNavigator />
-      </View>
+          {!this.state.isConnected ? 
+            <View style={{backgroundColor: 'red'}}>
+              <Text style={{textAlign: 'center'}}>Нет соединения с сервером!</Text>
+            </View>:
+            null
+          }
+        </View>
       )
     }
 
@@ -43,6 +59,5 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginTop: Constants.statusBarHeight
   }
 });

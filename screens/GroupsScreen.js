@@ -17,8 +17,7 @@ import { host } from '../constants/Host'
 
 import axios from 'axios';
 
-const screenW = Math.round(Dimensions.get('window').width);  
-const screenH = Math.round(Dimensions.get('window').height);
+const screenW = Math.round(Dimensions.get('window').width); 
 
 const institutes_names = ['ИНГ', 'ИЭ', 'ИПИТ', 'ИСАД', 'ИЦЭТП']
 // const groups_names = ['ПИ-18', 'ИСТ-18', 'БИС-18', 'БИН-18']
@@ -149,10 +148,16 @@ export default class GroupsScreen extends Component {
             [...Array(8).keys()].map(i => 
               <View
                 key={i}
-                style={styles.group_button}
+                style={[styles.group_button, {elevation: 0}]}
               >
                 <View  
-                  style={{backgroundColor: '#9DA7EE', height: '30%', width: '75%', opacity: 0.4}} 
+                  style={{
+                    backgroundColor: '#9DA7EE', 
+                    height: '30%', 
+                    width: '75%', 
+                    opacity: 0.4,
+                    borderRadius: 5,
+                  }} 
                 />
               </View>) :
               this.state.groups_names.map((group_name, key) => 

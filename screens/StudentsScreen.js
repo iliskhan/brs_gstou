@@ -1,24 +1,20 @@
 import React, { Component } from "react";
 
 import {
-  FlatList,
   ScrollView,
   StyleSheet,
   Dimensions,
   View,
   TouchableOpacity,
   Text,
-  Image,
   } from "react-native";
 
 import { LinearGradient } from 'expo-linear-gradient'
-import { images } from '../constants/Images'
 import { host } from '../constants/Host'
 
 import axios from 'axios'
 
-const screenW = Math.round(Dimensions.get('window').width);  
-const screenH = Math.round(Dimensions.get('window').height);
+const screenW = Math.round(Dimensions.get('window').width);
 
 export default class StudentsScreen extends Component {
 
@@ -51,7 +47,7 @@ export default class StudentsScreen extends Component {
               [...Array(15).keys()].map((student, index) => 
                 <View
                   key={index} 
-                  style={[styles.studentContainButton, {flex: 1}]}
+                  style={[styles.studentContainButton, {flex: 1, elevation: 0}]}
                 >
                   <View 
                     style={{
@@ -60,6 +56,7 @@ export default class StudentsScreen extends Component {
                       height: Math.round(screenW * 0.055), 
                       width: Math.round(screenW * 0.8), 
                       opacity: 0.4,
+                      borderRadius: 5,
                       marginVertical: Math.round(screenW * 0.03),
                     }}
                   />
