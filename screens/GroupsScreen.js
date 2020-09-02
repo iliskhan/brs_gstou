@@ -20,7 +20,7 @@ import axios from 'axios';
 const screenW = Math.round(Dimensions.get('window').width); 
 
 const institutes_names = ['ИНГ', 'ИЭ', 'ИПИТ', 'ИСАД', 'ИЦЭТП']
-// const groups_names = ['ПИ-18', 'ИСТ-18', 'БИС-18', 'БИН-18']
+const groups_names = ['ПИ-18', 'ИСТ-18', 'БИС-18', 'БИН-18']
 const courses = 4
 
 export default class GroupsScreen extends Component {
@@ -31,7 +31,7 @@ export default class GroupsScreen extends Component {
     selected_course: 1,
     inst_name: institutes_names[2],
     courses: [...Array(courses).keys()].map(i => ++i),
-    isWaitingResponse: true,
+    isWaitingResponse: false,
   }
 
   getGroups = () => {
@@ -51,9 +51,9 @@ export default class GroupsScreen extends Component {
         group_name, 
       })
     )}
-  componentDidMount() {
-    this.getGroups()
-  }
+  // componentDidMount() {
+  //   this.getGroups()
+  // }
 
   render() {
     return (
@@ -160,7 +160,7 @@ export default class GroupsScreen extends Component {
                   }} 
                 />
               </View>) :
-              this.state.groups_names.map((group_name, key) => 
+              groups_names.map((group_name, key) => 
               <TouchableOpacity
                 key={key}
                 onPress={() => this.changeScreen(group_name)}
