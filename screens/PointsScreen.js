@@ -11,11 +11,11 @@ import {
 
 import { DetailedPoints } from '../components/DetailedPoints'
 import { LinearGradient } from 'expo-linear-gradient'
-// import { points } from '../constants/DummyData'
+import { points } from '../constants/DummyData'
 import { host } from '../constants/Host'
 import axios from "axios";
 
-// const data = points
+const data = points
 
 const screenW = Math.round(Dimensions.get('window').width); 
 
@@ -26,7 +26,7 @@ export default class PointsScreen extends Component {
 
   state = {
     student: this.props.navigation.state.params.student,
-    data: undefined,
+    data: data,
     openCards: [],
   }
 
@@ -40,10 +40,10 @@ export default class PointsScreen extends Component {
     return arr
   }
 
-  componentDidMount() {
-    axios.get(`${host}/students/${this.state.student[1]}/points`)
-      .then(response => this.setState({ data: response.data }))
-  }
+  // componentDidMount() {
+  //   axios.get(`${host}/students/${this.state.student[1]}/points`)
+  //     .then(response => this.setState({ data: response.data }))
+  // }
 
   render() {
     return (

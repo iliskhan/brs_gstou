@@ -20,16 +20,16 @@ export default class StudentsScreen extends Component {
 
   state = {
     group_name: this.props.navigation.state.params.group_name,
-    students: undefined,
-    isWaitingResponse: true,
+    students: [...Array(15).keys()].map((key) => {return `Студент ${key+1}`}),
+    isWaitingResponse: false,
   }
-  componentDidMount() {
-    axios.get(`${host}/groups/${this.state.group_name}/students`)
-      .then(response => this.setState({
-        students: response.data, 
-        isWaitingResponse: false,
-      }))
-  }
+  // componentDidMount() {
+  //   axios.get(`${host}/groups/${this.state.group_name}/students`)
+  //     .then(response => this.setState({
+  //       students: response.data, 
+  //       isWaitingResponse: false,
+  //     }))
+  // }
 
   render() {
     return (
@@ -75,7 +75,7 @@ export default class StudentsScreen extends Component {
                   <Text
                     style={styles.studentName}
                   >
-                    {student[0]}
+                    {student}
                   </Text>
                 </TouchableOpacity>
                 )

@@ -11,7 +11,7 @@ export default class App extends Component {
 
   state = {
     assetsLoaded: false,
-    isConnected: null,
+    isConnected: true,
   };
 
   handleConnectionChange = (isConnected) => {
