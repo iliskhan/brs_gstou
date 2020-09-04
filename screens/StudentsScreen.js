@@ -20,7 +20,7 @@ export default class StudentsScreen extends Component {
 
   state = {
     group_name: this.props.navigation.state.params.group_name,
-    students: [...Array.keys()].map((key) => {return `Студент ${key+1}`}),
+    students: [...Array(15).keys()].map((key) => {return `Студент ${key+1}`}),
     isWaitingResponse: false,
   }
   // componentDidMount() {
@@ -34,7 +34,7 @@ export default class StudentsScreen extends Component {
   render() {
     return (
       <LinearGradient
-        colors={['#7B88D3', '#5B4CAB']}
+        colors={['#212D3A', '#212D3A']}
         style={styles.container}
       >
         <Text style={styles.label}>{`Студенты ${this.state.group_name}`}</Text>
@@ -75,7 +75,7 @@ export default class StudentsScreen extends Component {
                   <Text
                     style={styles.studentName}
                   >
-                    {student[0]}
+                    {student}
                   </Text>
                 </TouchableOpacity>
                 )
@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
     marginVertical: Math.round(screenW/50),
     backgroundColor: '#FCFCFF',
     borderRadius: 6,
-    shadowColor: "rgba(123, 136, 211, 0.28)",
+    shadowColor: "#212D3A",
     shadowOpacity: 0.28,
     shadowOffset: {
-      width: 4,
-      height: 8,
+      width: 2,
+      height: 4,
     },
     elevation: 4,
   },
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     marginVertical: Math.round(screenW * 0.03),
     fontSize: 15,
     lineHeight: 20,
-    color: '#7B88D3',
+    color: '#212D3A',
   },
   scrollView: {
     flex: 1,
