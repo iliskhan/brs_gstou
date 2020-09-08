@@ -30,7 +30,7 @@ export default class StudentsScreen extends Component {
   //       isWaitingResponse: false,
   //     }))
   // }
-
+  // for commit
   render() {
     return (
       <LinearGradient
