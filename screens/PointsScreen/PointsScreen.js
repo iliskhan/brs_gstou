@@ -9,10 +9,10 @@ import {
   Text,
   } from "react-native";
 
-import { DetailedPoints } from '../components/DetailedPoints'
+import { DetailedPoints } from '../../components/DetailedPoints'
 import { LinearGradient } from 'expo-linear-gradient'
 // import { points } from '../constants/DummyData'
-import { host } from '../constants/Host'
+import { host } from '../../constants/Host'
 import axios from "axios";
 
 // const data = points

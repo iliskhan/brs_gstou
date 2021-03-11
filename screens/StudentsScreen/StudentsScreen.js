@@ -10,7 +10,7 @@ import {
   } from "react-native";
 
 import { LinearGradient } from 'expo-linear-gradient'
-import { host } from '../constants/Host'
+import { host } from '../../constants/Host'
 
 import axios from 'axios'
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { images } from '../constants/Images'
+import { images } from '../../constants/Images'
 
 import {
 	StyleSheet,

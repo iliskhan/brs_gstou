@@ -14,10 +14,10 @@ import { createAppContainer, } from 'react-navigation';
 
 import { createStackNavigator, StackViewTransitionConfigs } from 'react-navigation-stack'
 
-import MainScreen from '../screens/MainScreen'
-import GroupsScreen from '../screens/GroupsScreen'
-import StudentsScreen from '../screens/StudentsScreen'
-import PointsScreen from '../screens/PointsScreen'
+import MainScreen from '../screens/MainScreen/MainScreen'
+import GroupsScreen from '../screens/GroupsScreen/GroupsScreen'
+import StudentsScreen from '../screens/StudentsScreen/StudentsScreen'
+import PointsScreen from '../screens/PointsScreen/PointsScreen'
 
 const screenW = Math.round(Dimensions.get('window').width); 
 
