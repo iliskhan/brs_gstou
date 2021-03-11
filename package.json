@@ -16,7 +16,7 @@
     "@expo/vector-icons": "^10.0.0",
     "@react-native-community/netinfo": "5.5.1",
     "@react-navigation/web": "~1.0.0-alpha.9",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "expo": "^37.0.0",
     "expo-asset": "~8.1.5",
     "expo-constants": "~9.0.0",
