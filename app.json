@@ -3,7 +3,6 @@
     "name": "brs-gstou",
     "slug": "brs_gstou",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
     "platforms": [
       "android"
     ],
