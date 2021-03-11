@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { styles } from "./Styles";
 import React, { Component } from "react";
 
 import {
@@ -7,7 +7,6 @@ import {
   View,
   Image,
   FlatList,
-  StyleSheet,
   Dimensions,
   ScrollView,
   TouchableOpacity,
@@ -16,7 +15,7 @@ import {
 import { host } from "../../constants/Host";
 import { images } from "../../constants/Images";
 import { LinearGradient } from "expo-linear-gradient";
-import { institutesNames } from "../../constants/Institutes";
+import { institutesNames, courses } from "../../constants/Institutes";
 
 const screenW = Math.round(Dimensions.get("window").width);
 
@@ -193,120 +192,3 @@ export default class GroupsScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Math.round(screenW / 5),
-    flex: 1,
-    backgroundColor: "#E5E5E5",
-  },
-  courses: {
-    flex: 1,
-  },
-  groups: {
-    flex: 5,
-  },
-  selection_text: {
-    paddingLeft: "6%",
-    color: "#C0C6FE",
-    letterSpacing: -0.4,
-    lineHeight: 22,
-    fontWeight: "500",
-    fontSize: 14,
-  },
-  logo_styles: {
-    width: 32,
-    height: 32,
-  },
-  institute_selector: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  course_selector: {
-    height: Math.round(screenW / 12.5),
-    marginHorizontal: "4%",
-    alignItems: "center",
-    justifyContent: "space-around",
-    flexDirection: "row",
-    backgroundColor: "#7B88D3",
-    borderRadius: 8,
-  },
-  group_selector: {
-    paddingVertical: Math.round(screenW / 25),
-    flexGrow: 1,
-    paddingLeft: Math.round(screenW / 22.5),
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  group_button: {
-    opacity: 0.4,
-    marginRight: Math.round(screenW / 20),
-    marginBottom: Math.round(screenW / 25),
-    backgroundColor: "#7B88D3",
-    borderRadius: 10,
-    height: Math.round(screenW / 4 / 1.5),
-    width: Math.round(screenW / 3.75),
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  selected_group_button: {
-    marginBottom: "4%",
-    backgroundColor: "#C0C6FE",
-    borderRadius: 10,
-    height: Math.round(screenW / 4 / 1.5),
-    width: Math.round(screenW / 3.75),
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  courses_text: {
-    color: "#9DA7EE",
-  },
-  courses_button: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    height: "100%",
-  },
-  courses_button_selected: {
-    flex: 1,
-    height: "85%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#C0C6FE",
-    borderRadius: 7,
-  },
-  not_selected_button: {
-    backgroundColor: "#7B88D3",
-    borderRadius: 10,
-    height: Math.round(screenW / 4.5),
-    width: Math.round(screenW / 4.5),
-    marginHorizontal: 5,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  not_selected_button_text: {
-    color: "#9DA7EE",
-    fontFamily: "SF-UI-Text",
-    fontSize: 16,
-    fontStyle: "normal",
-    fontWeight: "500",
-    lineHeight: 22,
-  },
-  selected_button: {
-    backgroundColor: "#9DA7EE",
-    borderRadius: 10,
-    height: Math.round(screenW / 4.5),
-    width: Math.round(screenW / 4.5),
-    marginHorizontal: 5,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  selected_button_text: {
-    color: "#FCFCFF",
-    fontFamily: "SF-UI-Text",
-    fontStyle: "normal",
-    fontWeight: "500",
-    fontSize: 16,
-    lineHeight: 22,
-  },
-});
