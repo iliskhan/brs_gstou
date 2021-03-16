@@ -1,3 +1,3 @@
-const host = 'http://188.0.190.91'
+const host = 'http://brs-mobile.gstou.ru'
 
-export { host }         
+export { host }
