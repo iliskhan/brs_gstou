@@ -58,7 +58,7 @@ export default class GroupsScreen extends Component {
   render() {
     return (
       <LinearGradient 
-        colors={['#7B88D3', '#5B4CAB']}
+        colors={['#243240', '#233344']}
         style={styles.container}
       >
         <View>
@@ -150,7 +150,7 @@ export default class GroupsScreen extends Component {
               >
                 <View  
                   style={{
-                    backgroundColor: '#9DA7EE', 
+                    backgroundColor: '#2e5075', 
                     height: '30%', 
                     width: '75%', 
                     opacity: 0.4,
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   },
   selection_text: {
     paddingLeft: '6%',
-    color: '#C0C6FE',
+    color: '#E5E5E5',
     letterSpacing: -0.40,
     lineHeight: 22,
     fontWeight: "500",
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     flexDirection: 'row',
-    backgroundColor: "#7B88D3",
+    backgroundColor: "#212D3A",
     borderRadius: 8,
     
   },
@@ -226,10 +226,10 @@ const styles = StyleSheet.create({
 
   },
   group_button: {
-    opacity: 0.4,
+
     marginRight: Math.round(screenW / 20),
     marginBottom: Math.round(screenW / 25),
-    backgroundColor: '#7B88D3',
+    backgroundColor: '#212D3A',
     borderRadius: 10,
     height:Math.round((screenW/4)/1.5),
     width: Math.round(screenW/3.75),
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   },
   selected_group_button: {
     marginBottom: '4%',
-    backgroundColor: '#C0C6FE',
+    backgroundColor: '#212D3A',
     borderRadius: 10,
     height:Math.round((screenW/4)/1.5),
     width: Math.round(screenW/3.75),
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   courses_text: {
-    color: '#9DA7EE',
+    color: '#E5E5E5',
   },
   courses_button: {
     flex: 1,
@@ -259,12 +259,12 @@ const styles = StyleSheet.create({
     height: '85%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#C0C6FE',
+    backgroundColor: '#517296',
     borderRadius: 7,
 
   },
   not_selected_button: {
-    backgroundColor: '#7B88D3',
+    backgroundColor: '#212D3A',
     borderRadius: 10,
     height:Math.round(screenW/4.5),
     width: Math.round(screenW/4.5),
@@ -273,7 +273,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   not_selected_button_text: {
-    color: '#9DA7EE',
+    opacity: 0.4,
+    color: '#FFF',
     fontFamily: 'SF-UI-Text',
     fontSize: 16,
     fontStyle: 'normal',
@@ -281,7 +282,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   selected_button: {
-    backgroundColor: '#9DA7EE',
+    backgroundColor: '#B92034',
     borderRadius: 10,
     height:Math.round(screenW/4.5),
     width: Math.round(screenW/4.5),
@@ -290,7 +291,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   selected_button_text: {
-    color: '#FCFCFF',
+    color: '#fff',
     fontFamily: 'SF-UI-Text',
     fontStyle: 'normal',
     fontWeight: '500',

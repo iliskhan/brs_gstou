@@ -48,7 +48,7 @@ export default class PointsScreen extends Component {
   render() {
     return (
       <LinearGradient
-        colors={['#7B88D3', '#5B4CAB']}
+        colors={['#212D3A', '#212D3A']}
         style={styles.container}    
       >
         <Text style={styles.label}>Баллы</Text>
@@ -63,7 +63,7 @@ export default class PointsScreen extends Component {
                     key={idx}
                     style={(!this.state.openCards.includes(idx)) ? 
                       styles.pointsCard:
-                      [styles.pointsCard, {backgroundColor: '#7B88D3'}]
+                      [styles.pointsCard, {backgroundColor: '#212D3A'}]
                     }
                     onPress={() => {
                       if (!this.state.openCards.includes(idx)){
@@ -92,7 +92,7 @@ export default class PointsScreen extends Component {
                           style={
                             (dataItem.disciplineType === 'Экзамен') ?
                             styles.disciplineType:
-                            [styles.disciplineType, {color: '#C0C6FE'}]
+                            [styles.disciplineType, {color: '#212D3A'}]
                           }
                         >
                           {dataItem.disciplineType.toUpperCase()}
@@ -128,7 +128,7 @@ export default class PointsScreen extends Component {
                             key={idx}
                           >
                             <Text 
-                              style={styles.disciplineType, {color: '#C0C6FE', marginBottom: Math.round(screenW / 37)}}
+                              style={styles.disciplineType, {color: '#FCFCFF', marginBottom: Math.round(screenW / 37)}}
                             >
                                 {idx+1}-Я АТТЕСТАЦИЯ
                             </Text>
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     marginHorizontal: '4%',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
-    shadowColor: "#7B88D3",
+    shadowColor: "#212D3A",
     shadowOpacity: 0.16,
     shadowRadius: 16,
     shadowOffset: {
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   pointsCircle: {
     marginRight: Math.round(screenW/20),
     marginTop: Math.round(screenW/15),
-    backgroundColor: '#E0E4FF',
+    backgroundColor: '#2d3d4f',
     width: circleWH,
     height: circleWH,
     borderRadius: Math.round(circleWH/2),
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     
   },
   detailedPoints: {
-    color: '#E0E4FF',
+    color: '#FCFCFF',
     fontStyle: 'normal',
     fontWeight: 'normal',
     fontSize: 13,
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22,
     lineHeight: 28,
-    color: '#6D74CD',
+    color: '#212D3A',
   },
   points: {
     fontStyle: 'normal',
@@ -290,6 +290,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 24,
     letterSpacing: 0.75,
-    color: '#7B88D3',
+    color: '#FCFCFF',
   },
 })

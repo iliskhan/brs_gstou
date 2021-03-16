@@ -30,11 +30,11 @@ export default class StudentsScreen extends Component {
   //       isWaitingResponse: false,
   //     }))
   // }
-
+  // for commit
   render() {
     return (
       <LinearGradient
-        colors={['#7B88D3', '#5B4CAB']}
+        colors={['#212D3A', '#212D3A']}
         style={styles.container}
       >
         <Text style={styles.label}>{`Студенты ${this.state.group_name}`}</Text>
@@ -108,11 +108,11 @@ const styles = StyleSheet.create({
     marginVertical: Math.round(screenW/50),
     backgroundColor: '#FCFCFF',
     borderRadius: 6,
-    shadowColor: "rgba(123, 136, 211, 0.28)",
+    shadowColor: "#212D3A",
     shadowOpacity: 0.28,
     shadowOffset: {
-      width: 4,
-      height: 8,
+      width: 2,
+      height: 4,
     },
     elevation: 4,
   },
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     marginVertical: Math.round(screenW * 0.03),
     fontSize: 15,
     lineHeight: 20,
-    color: '#7B88D3',
+    color: '#212D3A',
   },
   scrollView: {
     flex: 1,
