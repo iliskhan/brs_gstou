@@ -23,7 +23,7 @@ export default class MainScreen extends Component {
               this.props.navigation.navigate({ routeName: "GroupsScreen" })
             }
           >
-            <Text style={styles.textStyle}>Баллы</Text>
+            <Text style={styles.textStyle}>БРС</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonView}>
             <Text style={styles.textStyle}>Расписание</Text>

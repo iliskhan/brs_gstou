@@ -34,7 +34,7 @@ export default class StudentsScreen extends Component {
 
   render() {
     return (
-      <LinearGradient colors={["#7B88D3", "#5B4CAB"]} style={styles.container}>
+      <LinearGradient colors={["#212D3A", "#212D3A"]} style={styles.container}>
         <Text style={styles.label}>{`Студенты ${this.state.group_name}`}</Text>
         <View style={styles.scrollView}>
           <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -50,7 +50,7 @@ export default class StudentsScreen extends Component {
                     <View
                       style={{
                         alignSelf: "center",
-                        backgroundColor: "#9DA7EE",
+                        backgroundColor: "#bdbdbd",
                         height: Math.round(screenW * 0.055),
                         width: Math.round(screenW * 0.8),
                         opacity: 0.4,

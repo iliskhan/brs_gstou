@@ -34,7 +34,7 @@ export default class App extends Component {
           <AppNavigator />
           {!this.state.isConnected ? (
             <View style={{ backgroundColor: "red" }}>
-              <Text style={{ textAlign: "center" }}>
+              <Text style={{ textAlign: "center", color: "white" }}>
                 Нет соединения с сервером!
               </Text>
             </View>

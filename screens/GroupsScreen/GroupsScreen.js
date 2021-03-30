@@ -57,7 +57,7 @@ export default class GroupsScreen extends Component {
 
   render() {
     return (
-      <LinearGradient colors={["#7B88D3", "#5B4CAB"]} style={styles.container}>
+      <LinearGradient colors={["#243240", "#233344"]} style={styles.container}>
         <View>
           <Text
             style={[
@@ -161,7 +161,7 @@ export default class GroupsScreen extends Component {
                   <View key={i} style={[styles.group_button, { elevation: 0 }]}>
                     <View
                       style={{
-                        backgroundColor: "#9DA7EE",
+                        backgroundColor: "#2e5075",
                         height: "30%",
                         width: "75%",
                         opacity: 0.4,

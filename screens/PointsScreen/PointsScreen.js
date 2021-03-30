@@ -41,7 +41,7 @@ export default class PointsScreen extends Component {
 
   render() {
     return (
-      <LinearGradient colors={["#7B88D3", "#5B4CAB"]} style={styles.container}>
+      <LinearGradient colors={["#212D3A", "#212D3A"]} style={styles.container}>
         <Text style={styles.label}>Баллы</Text>
         <View style={styles.scrollView}>
           <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -52,7 +52,7 @@ export default class PointsScreen extends Component {
                     style={
                       !this.state.openCards.includes(idx)
                         ? styles.pointsCard
-                        : [styles.pointsCard, { backgroundColor: "#7B88D3" }]
+                        : [styles.pointsCard, { backgroundColor: "#212D3A" }]
                     }
                     onPress={() => {
                       if (!this.state.openCards.includes(idx)) {
@@ -83,7 +83,7 @@ export default class PointsScreen extends Component {
                           style={
                             dataItem.disciplineType === "Экзамен"
                               ? styles.disciplineType
-                              : [styles.disciplineType, { color: "#C0C6FE" }]
+                              : [styles.disciplineType, { color: "#212D3A" }]
                           }
                         >
                           {dataItem.disciplineType.toUpperCase()}
@@ -117,7 +117,7 @@ export default class PointsScreen extends Component {
                               style={
                                 (styles.disciplineType,
                                 {
-                                  color: "#C0C6FE",
+                                  color: "#FCFCFF",
                                   marginBottom: Math.round(screenW / 37),
                                 })
                               }
@@ -170,7 +170,7 @@ export default class PointsScreen extends Component {
                           style={{
                             width: Math.round(screenW * 0.2),
                             height: Math.round(screenW * 0.045),
-                            backgroundColor: "#C0C6FE",
+                            backgroundColor: "#bdbdbd",
                             marginLeft: Math.round(screenW / 20),
                           }}
                         />
@@ -180,7 +180,7 @@ export default class PointsScreen extends Component {
                             height: Math.round(screenW * 0.05),
                             marginTop: Math.round(screenW * 0.02),
                             marginLeft: Math.round(screenW / 20),
-                            backgroundColor: "#6D74CD",
+                            backgroundColor: "#212D3A",
                           }}
                         />
                       </View>
